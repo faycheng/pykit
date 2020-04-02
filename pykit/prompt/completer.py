@@ -2,8 +2,8 @@
 
 from enum import Enum
 from prompt_toolkit.completion import Completion, Completer
-from candy_utils.unique import unique
-from candy_path import iter as p_iter
+from pykit.utils.unique import unique
+from pykit.path import iter as p_iter
 
 
 class WordMatchType(object):

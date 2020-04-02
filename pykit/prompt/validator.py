@@ -29,7 +29,7 @@ class FloatValidator(Validator):
 
 class BoolValidator(Validator):
     def validate(self, document):
-        from candy_enums.boolstrs import BoolStrs
+        from pykit.enum.boolstrs import BoolStrs
         text = document.text
         if text.lower() not in BoolStrs.BOOL.value:
             raise ValidationError('Input must be one of {}'.format(BoolStrs.BOOL.value))

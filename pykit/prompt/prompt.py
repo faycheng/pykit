@@ -7,11 +7,11 @@ import ast
 # sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 import prompt_toolkit
-import candy_path as path
+import pykit.path as path
 
-from candy_prompt.completer import *
-from candy_prompt.validator import *
-from candy_prompt.history import PromptFileHistory as FileHistory
+from pykit.prompt.completer import *
+from pykit.prompt.validator import *
+from pykit.prompt.history import PromptFileHistory as FileHistory
 from enum import Enum
 
 class PromptType(Enum):
@@ -55,3 +55,4 @@ def prompt_path(message, root, type='DIR', recursion=False, default=None):
     res = prompt_toolkit.prompt(message, default=default or '', completer=completer,
                                 validator=converter.value)
     return _convert(res, 'STR')
+
