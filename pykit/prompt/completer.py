@@ -1,9 +1,11 @@
 # -*- coding:utf-8 -*-
 
 from enum import Enum
+
 from prompt_toolkit.completion import Completion, Completer
-from pykit.utils.unique import unique
+
 from pykit.path import iter as p_iter
+from pykit.utils.unique import unique
 
 
 class WordMatchType(object):
@@ -14,6 +16,7 @@ class WordMatchType(object):
 class WordCompleter(Completer):
     def __init__(self, words=None, history=None, match_type=WordMatchType.CONTAINS):
         self.words = words or []
+        self.history = history.load_history_strings() or []
         self.history = history or []
         self.match_type = match_type
         self.lower = False

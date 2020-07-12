@@ -1,14 +1,15 @@
 # -*- coding:utf-8 -*-
+import json
 import os
 import sys
+
 import click
-import json
 import polib
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
-from pykit.library.i18n.extract import extract
-from pykit.library.i18n import po
+from pykit.i18n.extract import extract
+from pykit.i18n import po
 
 
 def parse_lang(ctx, param, value):
@@ -50,7 +51,8 @@ def init():
 
 # TODO extract 时没有处理复数的情况
 @cli.command()
-@click.option('--domain', prompt=True, default=lambda: os.environ.get('INTERNATIONALIZATION_DOMAIN', os.getcwd().split('/')[-1]))
+@click.option('--domain', prompt=True,
+              default=lambda: os.environ.get('INTERNATIONALIZATION_DOMAIN', os.getcwd().split('/')[-1]))
 @click.option('--lang', prompt=True, default=lambda: os.environ.get('LANG', 'zh_CN'), callback=parse_lang)
 @click.option('--input_file', prompt=True, default='')
 @click.option('--input_dir', prompt=True, default='')
@@ -99,7 +101,8 @@ def compile(input_file, input_dir):
 @cli.command()
 @click.argument('domain')
 @click.argument('lang')
-@click.option('--locale_dir', prompt=True, default=lambda: os.environ.get('LOCALE_DIR', '{}/locale'.format(os.getcwd())))
+@click.option('--locale_dir', prompt=True,
+              default=lambda: os.environ.get('LOCALE_DIR', '{}/locale'.format(os.getcwd())))
 def status(domain, lang, locale_dir):
     po_file_path = '{locale}/{lang}/LC_MESSAGES/{domain}.po'.format(locale=locale_dir, lang=lang, domain=domain)
     if not (os.path.exists(po_file_path) and os.path.isfile(po_file_path)):
